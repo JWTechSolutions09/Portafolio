@@ -74,6 +74,7 @@ const BackendSkillsSection = () => {
                   width={64}
                   height={64}
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
               
