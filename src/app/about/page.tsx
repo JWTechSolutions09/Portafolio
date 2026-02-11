@@ -144,12 +144,6 @@ const TOOLS = [
     color: "#f05032",
   },
   {
-    name: "GitHub",
-    content: "Next.js is a React framework for production",
-    icon: <FaGithub size={"50px"} color="#fff" />,
-    color: "#000000",
-  },
-  {
     name: "VS Code",
     content: "Next.js is a React framework for production",
     icon: <SiVscodium size={"50px"} color="#007acc" />,
