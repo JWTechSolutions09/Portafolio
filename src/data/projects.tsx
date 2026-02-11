@@ -241,7 +241,7 @@ const projects: Project[] = [
     title: "IntTowing",
     src: "/assets/projects-screenshots/inttowing/IntTown.jpeg",
     screenshots: ["IntTown.jpeg", "IntTown2.jpeg"],
-    live: "https://inttowing.pages.dev/",
+    live: "https://ertowing.pages.dev",
     skills: {
       frontend: [
         PROJECT_SKILLS.react,
