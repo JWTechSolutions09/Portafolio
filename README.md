@@ -57,11 +57,37 @@ Welcome to the repository for my personal portfolio website! This is where I sho
 
 ## 🚀 Deployment
 
-This site is deployed on Vercel. For your own deployment, follow these steps:
+### Cloudflare Pages
 
-1. Push your code to a GitHub repository.
-2. Connect your repository to Vercel.
-3. Vercel will handle the deployment process.
+This site is configured for static export and can be deployed on Cloudflare Pages:
+
+1. **Build Configuration:**
+   - Build command: `npm run build`
+   - Deploy command: (leave empty)
+   - Output directory: `out`
+
+2. **Environment Variables:**
+   Add the following environment variable in Cloudflare Pages settings:
+   - `NEXT_PUBLIC_RESEND_API_KEY`: Your Resend API key (for contact form)
+
+3. **Deployment Steps:**
+   - Push your code to a GitHub repository
+   - Connect your repository to Cloudflare Pages
+   - Configure the build settings as shown above
+   - Add the environment variable
+   - Deploy!
+
+**Note:** The project uses static export (`output: "export"` in `next.config.mjs`), which generates a static site in the `out/` folder. API routes are not supported with static export, so the contact form uses Resend API directly from the client.
+
+### Local Build Test
+
+Before deploying, test the build locally:
+
+```bash
+npm run build
+```
+
+Verify that the `out/` folder is created successfully.
 
 ## 🤝 Contributing
 

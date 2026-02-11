@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import { config } from "@/data/config";
 
 const ContactForm = () => {
   const [fullName, setFullName] = React.useState("");
@@ -22,19 +23,39 @@ const ContactForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("/api/send", {
+      // Validate input
+      if (fullName.length < 2) throw new Error("Full name is invalid!");
+      if (!email.includes("@") || !email.includes(".")) throw new Error("Email is invalid!");
+      if (message.length < 10) throw new Error("Message is too short!");
+
+      // Use Resend API directly from client
+      // Note: For production, consider using Cloudflare Functions or Workers
+      // to keep the API key secure
+      const emailHtml = `
+        <div>
+          <h1>From: ${fullName}</h1>
+          <div style="color: red;">${email} sent you a message</div>
+          <blockquote>${message}</blockquote>
+        </div>
+      `;
+
+      const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          fullName,
-          email,
-          message,
+          from: "Portfolio <onboarding@resend.dev>",
+          to: [config.email],
+          subject: "Contact me from portfolio",
+          html: emailHtml,
         }),
       });
+
       const data = await res.json();
-      if (data.error) throw new Error(data.error);
+      if (data.error) throw new Error(data.error?.message || "Failed to send email");
+      
       toast({
         title: "Thank you!",
         description: "I'll get back to you as soon as possible.",
@@ -49,10 +70,10 @@ const ContactForm = () => {
         router.push("/");
         clearTimeout(timer);
       }, 1000);
-    } catch (err) {
+    } catch (err: any) {
       toast({
         title: "Error",
-        description: "Something went wrong! Please check the fields.",
+        description: err.message || "Something went wrong! Please check the fields.",
         className: cn(
           "top-0 w-full flex justify-center fixed md:max-w-7xl md:top-4 md:right-4"
         ),
