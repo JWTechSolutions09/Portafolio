@@ -439,5 +439,79 @@ const projects: Project[] = [
       );
     },
   },
+  {
+    id: "ank-developments",
+    category: "Web Empresarial",
+    title: "ANK Developments",
+    src: "/assets/projects-screenshots/ank1.png",
+    screenshots: ["ank1.png", "ank2.png"],
+    live: "https://ankdevelopments.pages.dev/",
+    skills: {
+      frontend: [
+        PROJECT_SKILLS.react,
+        PROJECT_SKILLS.js,
+        PROJECT_SKILLS.tailwind,
+      ],
+      backend: [],
+    },
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono text-2xl text-center">
+            ANK Developments - Página Web Empresarial
+          </TypographyP>
+          <TypographyP className="font-mono">
+            Sitio web empresarial moderno desarrollado para ANK Developments. 
+            Diseño profesional y responsivo que presenta los servicios y proyectos 
+            de la empresa de manera clara y atractiva, con una experiencia de usuario optimizada.
+          </TypographyP>
+          <ProjectsLinks live={this.live} repo={this.github} />
+          <SlideShow
+            images={[
+              `${BASE_PATH}/ank1.png`,
+              `${BASE_PATH}/ank2.png`,
+            ]}
+          />
+        </div>
+      );
+    },
+  },
+  {
+    id: "er-towings",
+    category: "Web Empresarial",
+    title: "ER Towings",
+    src: "/assets/projects-screenshots/ER1.png",
+    screenshots: ["ER1.png", "ER2.png"],
+    live: "https://ertowing.pages.dev/",
+    skills: {
+      frontend: [
+        PROJECT_SKILLS.react,
+        PROJECT_SKILLS.js,
+        PROJECT_SKILLS.tailwind,
+      ],
+      backend: [],
+    },
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono text-2xl text-center">
+            ER Towings - Página Web Empresarial
+          </TypographyP>
+          <TypographyP className="font-mono">
+            Sitio web empresarial desarrollado con Vite y React para ER Towings, 
+            empresa de servicios de remolque. Diseño moderno y responsivo que presenta 
+            los servicios de manera profesional, con una experiencia de usuario optimizada.
+          </TypographyP>
+          <ProjectsLinks live={this.live} repo={this.github} />
+          <SlideShow
+            images={[
+              `${BASE_PATH}/ER1.png`,
+              `${BASE_PATH}/ER2.png`,
+            ]}
+          />
+        </div>
+      );
+    },
+  },
 ];
 export default projects;

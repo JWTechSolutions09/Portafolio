@@ -20,9 +20,9 @@ import SectionWrapper from "../ui/section-wrapper";
 
 const ProjectsSection = () => {
   return (
-    <SectionWrapper id="projects" className="max-w-7xl mx-auto md:h-[130vh]">
+    <SectionWrapper id="projects" className="max-w-7xl mx-auto md:h-[130vh] pb-48 md:pb-64">
       <SectionHeader id='projects' title="Projects" />
-      <div className="grid grid-cols-1 md:grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {projects.map((project, index) => (
           <Modall key={project.src} project={project} />
         ))}
@@ -56,12 +56,14 @@ const Modall = ({ project }: { project: Project }) => {
             </div>
           </div>
         </ModalTrigger>
-        <ModalBody className="md:max-w-4xl md:max-h-[80%] overflow-auto">
-          <SmoothScroll isInsideModal={true}>
-            <ModalContent>
+        <ModalBody className="md:max-w-4xl md:max-h-[80%] overflow-hidden">
+          <ModalContent>
+            <div className="overflow-y-auto max-h-[calc(80dvh-120px)] pr-2" 
+                 onWheel={(e) => e.stopPropagation()}
+                 onTouchMove={(e) => e.stopPropagation()}>
               <ProjectContents project={project} />
-            </ModalContent>
-          </SmoothScroll>
+            </div>
+          </ModalContent>
           <ModalFooter className="gap-4">
             <button className="px-2 py-1 bg-gray-200 text-black dark:bg-black dark:border-black dark:text-white border border-gray-300 rounded-md text-sm w-28">
               Cancel

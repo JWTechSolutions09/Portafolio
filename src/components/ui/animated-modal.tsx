@@ -9,7 +9,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { ScrollArea } from "./scroll-area";
 
 interface ModalContextType {
   open: boolean;
@@ -81,8 +80,11 @@ export const ModalBody = ({
     if (open) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "";
     }
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   const modalRef = useRef(null);
@@ -114,6 +116,12 @@ export const ModalBody = ({
               "min-h-[50%] max-h-[90%] md:max-w-[40%] bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 md:rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
               className
             )}
+            onWheel={(e) => {
+              e.stopPropagation();
+            }}
+            onTouchMove={(e) => {
+              e.stopPropagation();
+            }}
             initial={{
               opacity: 0,
               scale: 0.5,
@@ -138,9 +146,9 @@ export const ModalBody = ({
             }}
           >
             <CloseIcon />
-            <ScrollArea className="h-[80dvh] w-full rounded-md border">
+            <div className="flex flex-col flex-1 overflow-hidden">
               {children}
-            </ScrollArea>
+            </div>
           </motion.div>
         </motion.div>
       )}
